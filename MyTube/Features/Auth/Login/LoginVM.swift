@@ -19,7 +19,11 @@ class LoginVM: ObservableObject {
     @Published var isSuccess: Bool = false
     @Published var isValid: Bool = false
     
-    init() {}
+    var coordinator: AuthCoordinator?
+    
+    init(_ coordinator: AuthCoordinator? = nil) {
+        self.coordinator = coordinator
+    }
     
     func login() {
         Task {
@@ -29,6 +33,9 @@ class LoginVM: ObservableObject {
                 //TODO: Save token
                 isLoading = false
                 isSuccess = true
+                
+                coordinator?.onFinish?()
+                
             } catch(let error) {
                 isLoading = false
                 self.error = error.localizedDescription

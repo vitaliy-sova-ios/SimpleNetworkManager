@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var coordinator: AuthCoordinator
+    
     @StateObject private var vm = LoginVM()
     @FocusState private var focusedField: Field?
     
@@ -21,89 +23,84 @@ struct LoginView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                VStack(spacing: 20) {
-                    Text("Вход")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.top, 24)
+        ZStack {
+            VStack(spacing: 20) {
+                Text("Вход")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.top, 24)
+                
+                VStack(spacing: 14) {
+                    TextField("Email", text: $vm.email)
+                        .keyboardType(.emailAddress)
+                        .textContentType(.emailAddress)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled(true)
+                        .focused($focusedField, equals: .email)
+                        .submitLabel(.next)
+                        .onSubmit { focusedField = .password }
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(12)
                     
-                    VStack(spacing: 14) {
-                        TextField("Email", text: $vm.email)
-                            .keyboardType(.emailAddress)
-                            .textContentType(.emailAddress)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled(true)
-                            .focused($focusedField, equals: .email)
-                            .submitLabel(.next)
-                            .onSubmit { focusedField = .password }
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(12)
-                        
-                        SecureField("Пароль", text: $vm.password)
-                            .textContentType(.password)
-                            .focused($focusedField, equals: .password)
-                            .submitLabel(.go)
-                            .onSubmit { loginAction() }
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
-                            .cornerRadius(12)
-                    }
-                    .padding(.horizontal)
-                    
-                    if let error = vm.error, !error.isEmpty {
-                        Text(error)
-                            .font(.footnote)
-                            .foregroundColor(.red)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
-                    }
-                    
-                    Button(action: loginAction) {
-                        Text(vm.isLoading ? "Входим..." : "Войти")
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background((isFormValid && !vm.isLoading) ? Color.blue : Color.gray)
-                            .cornerRadius(12)
-                    }
-                    .disabled(!isFormValid || vm.isLoading)
-                    .padding(.horizontal)
-                    
-                    Spacer()
+                    SecureField("Пароль", text: $vm.password)
+                        .textContentType(.password)
+                        .focused($focusedField, equals: .password)
+                        .submitLabel(.go)
+                        .onSubmit { loginAction() }
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(12)
+                }
+                .padding(.horizontal)
+                
+                if let error = vm.error, !error.isEmpty {
+                    Text(error)
+                        .font(.footnote)
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
                 }
                 
-                if vm.isLoading {
-                    Color.black.opacity(0.2)
-                        .ignoresSafeArea()
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .scaleEffect(1.2)
+                Button(action: loginAction) {
+                    Text(vm.isLoading ? "Входим..." : "Войти")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background((isFormValid && !vm.isLoading) ? Color.blue : Color.gray)
+                        .cornerRadius(12)
                 }
+                .disabled(!isFormValid || vm.isLoading)
+                .padding(.horizontal)
+                
+                Spacer()
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .onChange(of: vm.email) { _, _ in
-                vm.error = nil
-                vm.isValid = isFormValid
+            
+            if vm.isLoading {
+                Color.black.opacity(0.2)
+                    .ignoresSafeArea()
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .scaleEffect(1.2)
             }
-            .onChange(of: vm.password) { _, _ in
-                vm.error = nil
-                vm.isValid = isFormValid
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: vm.email) { _, _ in
+            vm.error = nil
+            vm.isValid = isFormValid
+        }
+        .onChange(of: vm.password) { _, _ in
+            vm.error = nil
+            vm.isValid = isFormValid
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Готово") { focusedField = nil }
             }
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Готово") { focusedField = nil }
-                }
-            }
-            .fullScreenCover(
-                isPresented: Binding(get: { vm.isSuccess }, set: { vm.isSuccess = $0 }),
-                content: {
-                    SwipeNavigator()
-                }
-            )
+        }
+        .onAppear {
+            vm.coordinator = coordinator
         }
     }
     
@@ -120,7 +117,7 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    LoginView()
-}
+//#Preview {
+//    LoginView()
+//}
 

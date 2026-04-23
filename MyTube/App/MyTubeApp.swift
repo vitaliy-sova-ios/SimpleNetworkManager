@@ -11,7 +11,7 @@ import SwiftUI
 struct MyTubeApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            AppCoordinatorView()
         }
     }
 }

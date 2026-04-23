@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 protocol AuthNetworkServiceProtocol {
-    func login(_ email: String, _ pass: String) async throws -> DecodingResult<String>
+    func login(_ email: String, _ pass: String) async throws -> String
 }
 
 struct AuthNetworkService: AuthNetworkServiceProtocol {
@@ -33,25 +33,11 @@ struct AuthNetworkService: AuthNetworkServiceProtocol {
         }
 
         var method: HTTPMethod {
-            switch self {
-            case .login,
-                 .register,
-                 .registerEnterCode,
-                 .forgotPassword,
-                 .forgotPassEnterCode,
-                 .logout: return .post
-            }
+            .post
         }
 
         var headers: HTTPHeaders? {
-            switch self {
-            case .login,
-                 .register,
-                 .registerEnterCode,
-                 .forgotPassword,
-                 .forgotPassEnterCode,
-                 .logout: return nil
-            }
+            nil
         }
         
         var body: (any Encodable)? {
@@ -72,9 +58,9 @@ struct AuthNetworkService: AuthNetworkServiceProtocol {
         
     }
 
-    func login(_ email: String, _ pass: String) async throws -> DecodingResult<String> {
+    func login(_ email: String, _ pass: String) async throws -> String {
         let request = LoginRequest(email: email, password: pass)
-        return try await NetworkManager.shared.request(EndpointType.login(request), resultType: String.self)
+        return try await NetworkManager.shared.request(EndpointType.login(request))
     }
 }
 
@@ -88,13 +74,18 @@ extension AuthNetworkService {
 
 
 struct AuthNetworkServiceMock: AuthNetworkServiceProtocol {
-    func login(_ email: String, _ pass: String) async throws -> DecodingResult<String> {
+    func login(_ email: String, _ pass: String) async throws -> String {
         try await Task.sleep(nanoseconds: 1_000_000_000)
         
-//        if email.isEmpty || pass.isEmpty {
-//            return .error()
-//        }
-        
-        return .value("Logged in successfully")
+        if Bool.random() {
+            switch Int.random(in: 0...3) {
+            case 0: throw APIError.alamofire(.init(message: "AADASDASD", code: 1))
+            case 1: throw APIError.server(.init(message: "AADASDASD", code: 1))
+            case 2: throw APIError.decoding(AFError.explicitlyCancelled)
+            default: throw APIError.unknown
+            }
+        } else {
+            return "token"
+        }
     }
 }
