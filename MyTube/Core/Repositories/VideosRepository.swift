@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct VideoItem: Codable {
-    let id: String
-    let url: URL
-    let name: String
-}
-
 protocol VideoFeedRepositoryProtocol {
     func fetchPage(_ page: Int) async throws -> [VideoItem]
 }

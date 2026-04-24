@@ -10,7 +10,7 @@ import Resolver
 
 @MainActor
 class LoginVM: ObservableObject {
-    @Injected var authService: AuthNetworkServiceProtocol
+    private let useCase: LoginUseCase
     
     @Published var email: String = ""
     @Published var password: String = ""
@@ -21,7 +21,8 @@ class LoginVM: ObservableObject {
     
     var coordinator: AuthCoordinator?
     
-    init(_ coordinator: AuthCoordinator? = nil) {
+    init(loginUseCase: LoginUseCase, _ coordinator: AuthCoordinator) {
+        self.useCase = loginUseCase
         self.coordinator = coordinator
     }
     
@@ -29,7 +30,7 @@ class LoginVM: ObservableObject {
         Task {
             isLoading = true
             do {
-                let token = try await authService.login(email, password)
+                let token = try await useCase.execute(email: email, password: password)
                 //TODO: Save token
                 isLoading = false
                 isSuccess = true

@@ -10,7 +10,6 @@ import Resolver
 
 @MainActor
 class HomeVM: ObservableObject {
-    @Injected var authService: AuthNetworkServiceProtocol
     
     @Published var email: String = ""
     @Published var password: String = ""

@@ -11,7 +11,7 @@ extension Resolver: @retroactive ResolverRegistering {
 
     public static func registerAllServices() {
         Resolver.register {
-            AuthNetworkServiceMock() as AuthNetworkServiceProtocol
+            AuthRepositoryImpl(network: AuthNetworkService()) as AuthRepository
         }
     }
 }

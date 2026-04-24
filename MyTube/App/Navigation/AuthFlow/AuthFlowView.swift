@@ -15,7 +15,7 @@ struct AuthFlowView: View {
 
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            LoginView()
+            coordinator.factory.makeLoginView(coordinator)
             .navigationDestination(for: AuthCoordinator.Route.self) { route in
                 switch route {
                 case .signIn:

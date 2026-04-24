@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject var coordinator: AuthCoordinator
     
-    @StateObject private var vm = LoginVM()
+    @StateObject var vm: LoginVM
     @FocusState private var focusedField: Field?
     
     enum Field {

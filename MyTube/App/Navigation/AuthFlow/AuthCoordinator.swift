@@ -8,6 +8,9 @@
 import SwiftUI
 
 final class AuthCoordinator: BaseFlowCoordinator<AuthCoordinator.Route> {
+    
+    let factory = AuthFactory()
+    
     enum Route: Hashable {
         case signIn
         case signUp

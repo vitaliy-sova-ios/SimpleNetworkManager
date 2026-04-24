@@ -18,17 +18,7 @@ struct HomeView: View {
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
-            VStack {
-                Text("Presets")
-                
-                Button("Create Preset") {
-                    coordinator.push(.createPreset)
-                }
-                
-                Button("Start Timer") {
-                    coordinator.isShowLogin = true
-                }
-            }
+            SwipeNavigator()
         }
         .onAppear {
             vm.coordinator = self.coordinator
