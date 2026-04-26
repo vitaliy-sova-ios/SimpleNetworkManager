@@ -7,22 +7,20 @@ on:
 
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Show Xcode version
-        run: xcodebuild -version
-        
-      - name: List Schemes
-        run: xcodebuild -list
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
-      - name: Resolve Packages
-        run: xcodebuild -resolvePackageDependencies
+      - name: Resolve SPM
+        run: xcodebuild -resolvePackageDependencies -scheme MyTube
 
-      - name: Run tests
+      - name: Run Tests
         run: xcodebuild test \
           -scheme MyTube \
-          -destination 'platform=iOS Simulator,name=iPhone 16'
+          -destination "platform=iOS Simulator,name=iPhone 16" \
+          -derivedDataPath ./DerivedData \
+          CODE_SIGNING_ALLOWED=NO
