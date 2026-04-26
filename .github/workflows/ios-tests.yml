@@ -15,6 +15,12 @@ jobs:
 
       - name: Show Xcode version
         run: xcodebuild -version
+        
+      - name: List Schemes
+        run: xcodebuild -list
+
+      - name: Resolve Packages
+        run: xcodebuild -resolvePackageDependencies
 
       - name: Run tests
         run: xcodebuild test \
