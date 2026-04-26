@@ -26,21 +26,18 @@ class LoginVM: ObservableObject {
         self.coordinator = coordinator
     }
     
-    func login() {
-        Task {
-            isLoading = true
-            do {
-                let token = try await useCase.execute(email: email, password: password)
-                //TODO: Save token
-                isLoading = false
-                isSuccess = true
-                
-                coordinator?.onFinish?()
-                
-            } catch(let error) {
-                isLoading = false
-                self.error = error.localizedDescription
-            }
+    func login() async {
+        isLoading = true
+        defer { isLoading = false }
+        do {
+            let token = try await useCase.execute(email: email, password: password)
+            //TODO: Save token
+            isSuccess = true
+            
+            coordinator?.onFinish?()
+            
+        } catch(let error) {
+            self.error = error.localizedDescription
         }
     }
 }

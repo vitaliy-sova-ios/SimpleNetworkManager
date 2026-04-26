@@ -1,0 +1,22 @@
+name: iOS Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Run tests
+        run: xcodebuild test \
+          -scheme MyTube \
+          -destination 'platform=iOS Simulator,name=iPhone 16'

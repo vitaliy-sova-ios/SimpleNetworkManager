@@ -11,11 +11,27 @@
 		CEC60DF42E09A7C100E405C8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CEC60DF32E09A7C100E405C8 /* Alamofire */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CE635BCD2F9E349300024157 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE8136C52DFF8AD800511509 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE8136CC2DFF8AD900511509;
+			remoteInfo = MyTube;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		CE635BC92F9E349200024157 /* MyTubeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyTubeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8136CD2DFF8AD900511509 /* MyTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		CE635BCA2F9E349300024157 /* MyTubeTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MyTubeTests;
+			sourceTree = "<group>";
+		};
 		CE8136CF2DFF8AD900511509 /* MyTube */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MyTube;
@@ -24,6 +40,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE635BC62F9E349200024157 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE8136CA2DFF8AD900511509 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -40,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				CE8136CF2DFF8AD900511509 /* MyTube */,
+				CE635BCA2F9E349300024157 /* MyTubeTests */,
 				CE8136CE2DFF8AD900511509 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				CE8136CD2DFF8AD900511509 /* MyTube.app */,
+				CE635BC92F9E349200024157 /* MyTubeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,6 +80,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE635BC82F9E349200024157 /* MyTubeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE635BCF2F9E349300024157 /* Build configuration list for PBXNativeTarget "MyTubeTests" */;
+			buildPhases = (
+				CE635BC52F9E349200024157 /* Sources */,
+				CE635BC62F9E349200024157 /* Frameworks */,
+				CE635BC72F9E349200024157 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE635BCE2F9E349300024157 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CE635BCA2F9E349300024157 /* MyTubeTests */,
+			);
+			name = MyTubeTests;
+			packageProductDependencies = (
+			);
+			productName = MyTubeTests;
+			productReference = CE635BC92F9E349200024157 /* MyTubeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CE8136CC2DFF8AD900511509 /* MyTube */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE8136D82DFF8ADA00511509 /* Build configuration list for PBXNativeTarget "MyTube" */;
@@ -86,9 +134,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
+				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					CE635BC82F9E349200024157 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = CE8136CC2DFF8AD900511509;
+					};
 					CE8136CC2DFF8AD900511509 = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -113,11 +165,19 @@
 			projectRoot = "";
 			targets = (
 				CE8136CC2DFF8AD900511509 /* MyTube */,
+				CE635BC82F9E349200024157 /* MyTubeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CE635BC72F9E349200024157 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE8136CB2DFF8AD900511509 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +188,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE635BC52F9E349200024157 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE8136C92DFF8AD900511509 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +204,59 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CE635BCE2F9E349300024157 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE8136CC2DFF8AD900511509 /* MyTube */;
+			targetProxy = CE635BCD2F9E349300024157 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		CE635BD02F9E349300024157 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F4BFK53Z57;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sova.vitaliy.MyTubeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyTube.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyTube";
+			};
+			name = Debug;
+		};
+		CE635BD12F9E349300024157 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F4BFK53Z57;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sova.vitaliy.MyTubeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyTube.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyTube";
+			};
+			name = Release;
+		};
 		CE8136D62DFF8ADA00511509 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -266,7 +385,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3K9KSW798V;
+				DEVELOPMENT_TEAM = F4BFK53Z57;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -294,7 +413,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3K9KSW798V;
+				DEVELOPMENT_TEAM = F4BFK53Z57;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -318,6 +437,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CE635BCF2F9E349300024157 /* Build configuration list for PBXNativeTarget "MyTubeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE635BD02F9E349300024157 /* Debug */,
+				CE635BD12F9E349300024157 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE8136C82DFF8AD800511509 /* Build configuration list for PBXProject "MyTube" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

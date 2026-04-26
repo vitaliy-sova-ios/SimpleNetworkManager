@@ -107,7 +107,9 @@ struct LoginView: View {
     private func loginAction() {
         guard isFormValid, !vm.isLoading else { return }
         focusedField = nil
-        vm.login()
+        Task {
+            await vm.login()
+        }
     }
     
     private func isEmailValid(_ email: String) -> Bool {
